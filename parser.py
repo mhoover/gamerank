@@ -32,15 +32,21 @@ def get_thing_data(type, ids, stats=True):
     return ElementTree.fromstring(d.content)
 
 
+def loop_through_xml_tree(parent, dict):
+    for kid in parent:
+        for key, val in kid.items():
+            if key=='value':
+                dict[kid.tag].append(val)
+            else:
+                dict[key].append(val)        
+        if len(kid)>1:
+            loop_through_xml_tree(kid, dict)
+    return dict
+
+
 def xml_to_df(xml):
     """ Formats XML output into a pandas dataframe """
-    dict = defaultdict(list)
-    for kid in xml:
-        for key, val in kid.items():
-            dict[key].append(val)
-        for gkid in kid:
-            for key, val in gkid.items():
-                dict[gkid.tag].append(v)
+    dict = loop_through_xml_tree(xml, defaultdict(list))
     return pd.DataFrame(dict)
     
 
