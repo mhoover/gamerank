@@ -15,5 +15,8 @@ from gamerank.parser import *
 def test_loop_through_xml_tree(test, exp_id, exp_name, exp_votes, exp_bayes):
     test_case = loop_through_xml_tree(test, defaultdict(list))
     
-    assert test_case['id'] == [exp_id]
-    # TODO: need to change how key is created; need to re-run tests
+    assert test_case['item_id'] == [exp_id]
+    assert test_case['name_value'] == [exp_name]
+    assert test_case['result_numvotes'] == [exp_votes]
+    assert test_case['rank_bayesaverage'] == [exp_bayes]
+    # TODO: fix failing test on result_numvotes -- need to change key somehow
