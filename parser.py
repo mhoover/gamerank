@@ -39,7 +39,7 @@ def loop_through_xml_tree(parent, dict):
                 dict[kid.tag].append(val)
             else:
                 dict[key].append(val)        
-        if len(kid)>1:
+        if len(kid)>=1:
             loop_through_xml_tree(kid, dict)
     return dict
 
