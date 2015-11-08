@@ -35,7 +35,12 @@ def get_thing_data(type, ids, stats=True):
 def loop_through_xml_tree(parent, dict):
     for kid in parent:
         for key, val in kid.items():
-            dict['{}_{}'.format(kid.tag, key)].append(val)
+            i = 1
+            if '{}_{}'.format(kid.tag, key) in dict.keys():
+                dict['{}_{}{}'.format(kid.tag, key, i)].append(val)
+                i+=1
+            else:
+                dict['{}_{}'.format(kid.tag, key)].append(val)
         if len(kid)>=1:
             loop_through_xml_tree(kid, dict)
     return dict

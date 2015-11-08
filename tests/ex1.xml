@@ -6,6 +6,7 @@
             <poll name="suggested_numplayers" title="User Suggested Number of Players" totalvotes="8">
                 <results numplayers="1">
                     <result value="Best" numvotes="0" />
+                    <result value="Average" numvotes="1" />
                 </results>
             </poll>
             <statistics page="1">
