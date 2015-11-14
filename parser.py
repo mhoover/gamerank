@@ -1,6 +1,7 @@
 import json
 import requests
 import re
+import time
 import pandas as pd
 import numpy as np
 from xml.etree import ElementTree
@@ -21,7 +22,8 @@ def get_thing_data(type, ids, stats=True):
     returns an XML object with requested game information and 
     statistics.
 
-    ids = individual id or list of ids
+    ids = individual id or list of ids; needs to be in the form 
+    '111' or '111, 112' -- can do this by wrapping a list in str()
     type = boardgame, but could be something else supported by 
     BoardGameGeek, like boardgameexpansion, videogame, rpgitem, or 
     rpgissue """
@@ -35,12 +37,7 @@ def get_thing_data(type, ids, stats=True):
 def loop_through_xml_tree(parent, dict):
     for kid in parent:
         for key, val in kid.items():
-            i = 1
-            if '{}_{}'.format(kid.tag, key) in dict.keys():
-                dict['{}_{}{}'.format(kid.tag, key, i)].append(val)
-                i+=1
-            else:
-                dict['{}_{}'.format(kid.tag, key)].append(val)
+            dict['{}_{}'.format(kid.tag, key)].append(val)
         if len(kid)>=1:
             loop_through_xml_tree(kid, dict)
     return dict
@@ -48,7 +45,8 @@ def loop_through_xml_tree(parent, dict):
 
 def xml_to_df(xml):
     """ Formats XML output into a pandas dataframe """
-    dict = loop_through_xml_tree(xml, defaultdict(list))
-    return pd.DataFrame(dict)
-    
+    d = loop_through_xml_tree(xml, defaultdict(list))
+    df = pd.DataFrame(d)
+    df['date'] = time.strftime('%d-%b-%Y')
+    return df
 

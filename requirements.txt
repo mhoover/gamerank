@@ -1,0 +1,6 @@
+boto
+numpy
+scipy
+pandas
+requests
+pytest
