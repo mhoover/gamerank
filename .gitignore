@@ -1,4 +1,4 @@
-# no python bytcode files
+# no python bytecode files
 *.pyc
 
 .cache/
