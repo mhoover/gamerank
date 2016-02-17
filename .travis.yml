@@ -2,9 +2,9 @@ language: python
 python:
     - "2.7"
 before_install:
-  - pip install libblas-dev
-  - pip install liblapack-dev
-  - pip install gfortran
+  - sudo apt-get install libblas-dev
+  - sudo apt-get install liblapack-dev
+  - sudo apt-get install gfortran
 install:
     - pip install -r requirements.txt
 script:
@@ -13,3 +13,5 @@ notifications:
     email:
         recipients:
             - matthew.a.hoover@gmail.com
+sudo:
+  - required
