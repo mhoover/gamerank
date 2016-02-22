@@ -1,5 +1,7 @@
 # GameRank: Visualizing game popularity at BoardGameGeek over time
-## Status: 
+[![Build Status](https://travis-ci.org/mhoover/gamerank.svg?branch=master)](https://travis-ci.org/mhoover/gamerank)
+
+## Status:
 *Work in progress*
 
 ## Introduction
