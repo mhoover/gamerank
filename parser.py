@@ -27,8 +27,7 @@ def get_thing_data(type, ids):
     rpgissue
     ids = individual id or list of ids; needs to be in the form
     '111' or '111, 112' -- can do this by wrapping a list in str()
-    stats = default to True; provides additional metrics that are
-    usually desired """
+    """
     ids = re.sub('^0\s{1,}|\n[\w\s:,]{1,}', '',
                  re.sub('\n[0-9]{1,}\s{1,}', ', ', ids))
     d = requests.get('{}/thing?type={}&id={}&stats=1'.format(URL, type,
